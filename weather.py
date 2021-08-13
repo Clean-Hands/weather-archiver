@@ -4,6 +4,7 @@ from sys import argv
 import json
 import os
 
+weather = {}
 
 if len(argv) > 1:
     lat = argv[1]
@@ -12,7 +13,8 @@ else:
     lat = 44.918355000000076
     lon = -93.32269499999995
 
-weather = {}
+weather["lat"] = lat
+weather["lon"] = lon
 
 request = requests.get(f"https://forecast.weather.gov/MapClick.php?lat={lat}&lon={lon}")
 soup = BeautifulSoup(request.content, "html.parser")
@@ -33,10 +35,10 @@ image = requests.get(f"https://forecast.weather.gov/{imageURL}")
 
 timeDir = weather["Last update"].replace(":",";")
 
-os.makedirs(f".\\Weather Dumps\\{timeDir}")
+os.makedirs(f".\\Weather Dumps\\{lat}, {lon} - {timeDir}")
 
-with open(f".\\Weather Dumps\\{timeDir}\\image.png", "wb") as f:
+with open(f".\\Weather Dumps\\{lat}, {lon} - {timeDir}\\image.png", "wb") as f:
     f.write(image.content)
 
-with open(f".\\Weather Dumps\\{timeDir}\\weather.json", "w+", encoding = "utf-8") as f:
+with open(f".\\Weather Dumps\\{lat}, {lon} - {timeDir}\\weather.json", "w+", encoding = "utf-8") as f:
     json.dump(weather, f)
