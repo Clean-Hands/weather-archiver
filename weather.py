@@ -14,12 +14,6 @@ else:
 
 weather = {}
 
-# with open ("test.html", "wb") as f:
-#     f.write(request.content)
-
-# with open(r"C:\Users\ckle2\OneDrive\Desktop\test.html", "r", encoding = "utf-8") as f:
-#     document = f.read()
-
 request = requests.get(f"https://forecast.weather.gov/MapClick.php?lat={lat}&lon={lon}")
 soup = BeautifulSoup(request.content, "html.parser")
 F = (soup.select_one("p.myforecast-current-lrg")).string
