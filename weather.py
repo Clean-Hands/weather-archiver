@@ -18,10 +18,14 @@ weather["lon"] = lon
 
 request = requests.get(f"https://forecast.weather.gov/MapClick.php?lat={lat}&lon={lon}")
 soup = BeautifulSoup(request.content, "html.parser")
+
 F = (soup.select_one("p.myforecast-current-lrg")).string
 weather["F"] = F
 C = (soup.select_one("p.myforecast-current-sm")).string
 weather["C"] = C
+
+condition = soup.select_one("p.myforecast-current").string
+weather["Condition"] = condition
 
 table = soup.select("table > tr")
 for element in table:
