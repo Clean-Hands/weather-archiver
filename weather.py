@@ -32,12 +32,12 @@ for element in table:
     tds = element.select("td")
     title = tds[0].string.strip()
     value = tds[1].string.strip()
-    weather[title] = value
+    weather[title.replace(" ","_")] = value
 
 imageURL = (soup.select_one("img.pull-left")).get("src")
 image = requests.get(f"https://forecast.weather.gov/{imageURL}")
 
-timeDir = weather["Last update"].replace(":",";")
+timeDir = weather["Last_update"].replace(":",";")
 
 os.makedirs(f".\\Weather Dumps\\{lat}, {lon} - {timeDir}")
 
