@@ -7,4 +7,10 @@ The layout is `weather.py [latitude] [longitude]`, with an example execution loo
 
 If nothing is passed, it will default to latitude: `44.918355000000076`, longitude: `-93.32269499999995`, also known as Minneapolis, MN.
 
+If you would like the weather dumps to be stored in a location other than the directory `weather.py` is in, you can pass a third argument with the desired destination. With this third argument added, the layout looks like `weather.py [latitude] [longitude] [location]`, and an example execution looks something like this: `weather.py 40.730610 -73.935242 C:\Users\ExampleUser\Desktop`.
+
+If there are spaces anywhere in the path, the path needs to be in quotes, as shown here: `weather.py 40.730610 -73.935242 "C:\Users\Example User\Desktop"`.
+
+## Loading Data
+
 [weather-loader](https://github.com/Clean-Hands/weather-loader) can be used to load data downloaded by the weather-archiver.

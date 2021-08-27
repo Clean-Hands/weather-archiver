@@ -6,12 +6,17 @@ import os
 
 weather = {}
 
-if len(argv) > 1:
+if len(argv) > 2:
     lat = argv[1]
     lon = argv[2]
 else:
     lat = 44.918355000000076
     lon = -93.32269499999995
+
+if len(argv) > 3:
+    fileLocation = argv[3]
+else:
+    fileLocation = "."
 
 weather["lat"] = lat
 weather["lon"] = lon
@@ -39,10 +44,10 @@ image = requests.get(f"https://forecast.weather.gov/{imageURL}")
 
 timeDir = weather["Last_update"].replace(":",";")
 
-os.makedirs(f".\\Weather Dumps\\{lat}, {lon} - {timeDir}")
+os.makedirs(f"{fileLocation}\\Weather Dumps\\{lat}, {lon} - {timeDir}")
 
-with open(f".\\Weather Dumps\\{lat}, {lon} - {timeDir}\\image.png", "wb") as f:
+with open(f"{fileLocation}\\Weather Dumps\\{lat}, {lon} - {timeDir}\\image.png", "wb") as f:
     f.write(image.content)
 
-with open(f".\\Weather Dumps\\{lat}, {lon} - {timeDir}\\weather.json", "w+", encoding = "utf-8") as f:
+with open(f"{fileLocation}\\Weather Dumps\\{lat}, {lon} - {timeDir}\\weather.json", "w+", encoding = "utf-8") as f:
     json.dump(weather, f)
