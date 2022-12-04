@@ -38,7 +38,7 @@ for element in table:
     title = tds[0].string.strip()
     value = tds[1].string.strip()
     weather[title.replace(" ","_")] = value
-
+    
 imageURL = (soup.select_one("img.pull-left")).get("src")
 image = requests.get(f"https://forecast.weather.gov/{imageURL}")
 
